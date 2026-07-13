@@ -79,10 +79,6 @@ sudo systemctl enable bitcoin-fullnode-exporter && \
 sudo systemctl restart bitcoin-fullnode-exporter && \
 sudo journalctl -u bitcoin-fullnode-exporter -f -o cat
 ```
-#### Metrics will be available at:
-```bash
-http://127.0.0.1:9091/metrics
-```
 
 ## Docker setup
 
@@ -94,11 +90,20 @@ docker compose up -d --build
 ```bash
 docker compose logs -f bitcoin-fullnode-exporter
 ```
-#### Stop:
+### Expected startup logs:
 ```bash
-docker compose down
+[21:49:04] |   INFO    | 🏇 Starting the app...
+[21:49:04] |   INFO    | -------------------------------------------------
+[21:49:04] |   INFO    | |   App Log level:        INFO
+[21:49:04] |   INFO    | |   Prometheus host:      127.0.0.1:9098
+[21:49:04] |   INFO    | |   Bitcoin RPC URL:      http://127.0.0.1:38332
+[21:49:04] |   INFO    | |   Bitcoin RPC timeout:  10.0 seconds
+[21:49:04] |   INFO    | |   Collection interval:  15.0 seconds
+[21:49:04] |   INFO    | -------------------------------------------------
+[21:49:04] |   INFO    | 📊 Metrics server started at http://127.0.0.1:9098/metrics
+[21:49:04] |   INFO    | Bitcoin metric collection completed. Successful groups: 14/14
 ```
-#### Metrics will be available at:
+### Metrics will be available at:
 ```bash
 http://127.0.0.1:9091/metrics
 ```
