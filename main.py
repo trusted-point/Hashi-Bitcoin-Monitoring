@@ -38,7 +38,6 @@ def print_app_config() -> None:
     logger.info("🏇 Starting the app...")
     logger.info("-------------------------------------------------")
     logger.info(f"|   App Log level:        {config.app_log_level}")
-    logger.info(f"|   App Log path:         {config.app_log_path or 'disabled'}")
     logger.info(f"|   Prometheus host:      {config.prometheus_host}:{config.prometheus_port}")
     logger.info(f"|   Bitcoin RPC URL:      {config.bitcoin_rpc_url}")
     logger.info(f"|   Bitcoin RPC timeout:  {config.bitcoin_rpc_timeout} seconds")

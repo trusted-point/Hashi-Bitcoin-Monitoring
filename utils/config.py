@@ -1,7 +1,9 @@
 import argparse
 import os
 from dataclasses import dataclass
+
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -81,7 +83,6 @@ class Config:
     prometheus_collect_interval: float
 
     app_log_level: str
-    app_log_path: str | None
 
     @property
     def bitcoin_rpc_url(self) -> str:
@@ -175,12 +176,6 @@ def parse_config() -> Config:
         help="Application log level",
     )
 
-    parser.add_argument(
-        "--app-log-path",
-        default=None,
-        help="Path to the application log file; disabled if not set",
-    )
-
     args = parser.parse_args()
 
     try:
@@ -203,7 +198,6 @@ def parse_config() -> Config:
         prometheus_port=args.prometheus_port,
         prometheus_collect_interval=args.collect_interval,
         app_log_level=args.app_log_level,
-        app_log_path=args.app_log_path or os.getenv("APP_LOG_PATH"),
     )
 
 
