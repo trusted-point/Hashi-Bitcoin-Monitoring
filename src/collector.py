@@ -303,15 +303,27 @@ def collect_index_metrics(
     BITCOIN_NODE_INDEX_SYNCED.clear()
     BITCOIN_NODE_INDEX_HEIGHT.clear()
 
-    BITCOIN_NODE_FEATURE_ENABLED.labels(feature="txindex",).set(int("txindex" in indexes))
-    BITCOIN_NODE_FEATURE_ENABLED.labels(feature="blockfilterindex",).set(int("basic block filter index" in indexes))
+    txindex_enabled = "txindex" in indexes
+    blockfilterindex_enabled = "basic block filter index" in indexes
+
+    BITCOIN_NODE_FEATURE_ENABLED.labels(feature="txindex").set(int(txindex_enabled))
+    BITCOIN_NODE_FEATURE_ENABLED.labels(feature="blockfilterindex").set(int(blockfilterindex_enabled))
+
+    BITCOIN_NODE_INDEX_SYNCED.labels(index="txindex").set(0)
+    BITCOIN_NODE_INDEX_HEIGHT.labels(index="txindex").set(0)
+    BITCOIN_NODE_INDEX_SYNCED.labels(index="blockfilterindex").set(0)
+    BITCOIN_NODE_INDEX_HEIGHT.labels(index="blockfilterindex").set(0)
 
     for index_name, index_info in indexes.items():
-        index_label = index_name.replace(" ", "_")
+        index_label = (
+            "blockfilterindex"
+            if index_name == "basic block filter index"
+            else index_name
+        )
 
-        BITCOIN_NODE_INDEX_SYNCED.labels(index=index_label,).set(int(index_info["synced"]))
-        BITCOIN_NODE_INDEX_HEIGHT.labels(index=index_label,).set(index_info["best_block_height"])
-        
+        BITCOIN_NODE_INDEX_SYNCED.labels(index=index_label).set(int(index_info["synced"]))
+        BITCOIN_NODE_INDEX_HEIGHT.labels(index=index_label).set(index_info["best_block_height"])
+
 def collect_metrics(
     rpc: BitcoinRPCClient,
 ) -> None:
