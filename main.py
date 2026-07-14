@@ -1,6 +1,7 @@
 import signal
 import threading
 
+from socketserver import ThreadingMixIn
 from typing import Callable
 
 from prometheus_client import make_wsgi_app
@@ -17,6 +18,14 @@ from utils.logger import logger
 
 
 shutdown_event = threading.Event()
+metrics_server: WSGIServer | None = None
+
+
+class ThreadingWSGIServer(ThreadingMixIn, WSGIServer):
+    daemon_threads = True
+    block_on_close = False
+    allow_reuse_address = True
+    request_queue_size = 32
 
 
 class MetricsRequestHandler(WSGIRequestHandler):
@@ -32,6 +41,13 @@ def handle_shutdown_signal(signum, _frame) -> None:
     logger.info(f"🛑 Received {signal_name}. Shutting down...")
 
     shutdown_event.set()
+
+    if metrics_server is not None:
+        threading.Thread(
+            target=metrics_server.shutdown,
+            name="prometheus-http-shutdown",
+            daemon=True,
+        ).start()
 
 
 def print_app_config() -> None:
@@ -52,54 +68,41 @@ def create_metrics_app() -> Callable:
         if environ.get("PATH_INFO") == "/metrics":
             return metrics_app(environ, start_response)
 
+        body = b"Not Found\n"
+
         start_response(
             "404 Not Found",
             [
                 ("Content-Type", "text/plain; charset=utf-8"),
-                ("Content-Length", "10"),
+                ("Content-Length", str(len(body))),
             ],
         )
 
-        return [b"Not Found\n"]
+        return [body]
 
     return app
 
 
-def start_metrics_server(
-    host: str,
-    port: int,
-) -> tuple[WSGIServer, threading.Thread]:
-    server = make_server(
-        host,
-        port,
-        create_metrics_app(),
-        handler_class=MetricsRequestHandler,
-    )
+def collector_loop(rpc: BitcoinRPCClient) -> None:
+    while not shutdown_event.is_set():
+        try:
+            collect_metrics(rpc)
+        except Exception:
+            logger.exception("Unexpected error in metric collection loop")
 
-    server_thread = threading.Thread(
-        target=server.serve_forever,
-        name="prometheus-http-server",
-        daemon=True,
-    )
+        if shutdown_event.is_set():
+            break
 
-    server_thread.start()
-
-    return server, server_thread
-
-
-def wait_for_next_collection(interval: float) -> None:
-    shutdown_event.wait(interval)
+        shutdown_event.wait(
+            config.prometheus_collect_interval
+        )
 
 
 def main() -> None:
-    signal.signal(
-        signal.SIGTERM,
-        handle_shutdown_signal,
-    )
-    signal.signal(
-        signal.SIGINT,
-        handle_shutdown_signal,
-    )
+    global metrics_server
+
+    signal.signal(signal.SIGTERM, handle_shutdown_signal)
+    signal.signal(signal.SIGINT, handle_shutdown_signal)
 
     print_app_config()
 
@@ -110,14 +113,25 @@ def main() -> None:
         timeout=config.bitcoin_rpc_timeout,
     )
 
-    metrics_server = None
-    metrics_thread = None
+    collector_thread = None
 
     try:
-        metrics_server, metrics_thread = start_metrics_server(
-            host=config.prometheus_host,
-            port=config.prometheus_port,
+        metrics_server = make_server(
+            config.prometheus_host,
+            config.prometheus_port,
+            create_metrics_app(),
+            server_class=ThreadingWSGIServer,
+            handler_class=MetricsRequestHandler,
         )
+
+        collector_thread = threading.Thread(
+            target=collector_loop,
+            args=(rpc,),
+            name="bitcoin-metrics-collector",
+            daemon=True,
+        )
+
+        collector_thread.start()
 
         logger.info(
             f"📊 Metrics server started at "
@@ -125,27 +139,27 @@ def main() -> None:
             f"{config.prometheus_port}/metrics"
         )
 
-        while not shutdown_event.is_set():
-            collect_metrics(rpc)
-
-            if shutdown_event.is_set():
-                break
-
-            wait_for_next_collection(
-                config.prometheus_collect_interval
-            )
+        # HTTP server runs in the main thread.
+        metrics_server.serve_forever()
 
     finally:
-        rpc.close()
-        logger.info("🔌 Bitcoin RPC session closed")
+        shutdown_event.set()
 
         if metrics_server is not None:
-            metrics_server.shutdown()
             metrics_server.server_close()
 
-        if metrics_thread is not None:
-            metrics_thread.join(timeout=5)
+        if collector_thread is not None:
+            collector_thread.join(
+                timeout=config.bitcoin_rpc_timeout + 5
+            )
 
+            if collector_thread.is_alive():
+                logger.warning(
+                    "⚠️ Collector thread did not stop within the timeout"
+                )
+
+        rpc.close()
+        logger.info("🔌 Bitcoin RPC session closed")
         logger.info("📊 Metrics server stopped")
 
 
