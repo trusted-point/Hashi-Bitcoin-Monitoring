@@ -30,7 +30,7 @@ Deploy it for deeper visibility into the underlying Bitcoin Core Fullnode. See t
 #       labels:
 #         alias: "mainnet"
 
-# Multiple targets can be added under each job to monitor several Hashi and Bitcoin. Use a unique alias for every target so it can be selected separately in Grafana.
+# Multiple targets can be added under each job to monitor several Hashi and Bitcoin nodes. Use a unique alias for every target so it can be selected separately in Grafana.
 ```
 
 ## Grafana Dashboard & Variables
