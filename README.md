@@ -69,14 +69,15 @@ cd $HOME
 git clone https://github.com/trusted-point/Hashi-Bitcoin-Monitoring.git
 cd Hashi-Bitcoin-Monitoring
 ```
-#### 2. Copy the example environment file and update it with your settings:
+#### 2. Copy the `.env.example` file and update it with your settings:
 ```bash
 cp .env.example .env
 nano .env
 chmod 600 .env
 ```
-Config priority: CLI flags --> environment/.env --> built-in defaults
+- Config priority: CLI flags --> environment/.env --> built-in defaults
 
+- The Bitcoin RPC credentials are available only through environment variables or the .env file.
 ## Systemd Setup
 
 #### 1. Update and install required packages:
