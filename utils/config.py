@@ -5,70 +5,139 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 
 
+# ---------------------------------------------------------------------------
+# Built-in defaults
+# ---------------------------------------------------------------------------
+
+DEFAULT_BITCOIN_RPC_IP = "127.0.0.1"
+DEFAULT_BITCOIN_RPC_PORT = 38332
+DEFAULT_BITCOIN_RPC_TIMEOUT = 10.0
+
+DEFAULT_PROMETHEUS_HOST = "127.0.0.1"
+DEFAULT_PROMETHEUS_PORT = 9097
+DEFAULT_PROMETHEUS_COLLECT_INTERVAL = 15.0
+
+DEFAULT_APP_LOG_LEVEL = "INFO"
+
+
+# ---------------------------------------------------------------------------
+# Environment
+# ---------------------------------------------------------------------------
+
 load_dotenv()
 
 
-def validate_log_level(value: str) -> str:
-    levels = {
-        "DEBUG",
-        "INFO",
-        "WARNING",
-        "ERROR",
-        "CRITICAL",
-    }
-
-    log_level = value.upper()
-
-    if log_level not in levels:
-        raise argparse.ArgumentTypeError(
-            f"Invalid log level: {value}"
-        )
-
-    return log_level
-
-
-def validate_port(value: str) -> int:
-    try:
-        port = int(value)
-    except ValueError:
-        raise argparse.ArgumentTypeError(
-            "Port must be an integer"
-        )
-
-    if not 1 <= port <= 65535:
-        raise argparse.ArgumentTypeError(
-            "Port must be between 1 and 65535"
-        )
-
-    return port
-
-
-def validate_positive_float(value: str) -> float:
-    try:
-        number = float(value)
-    except ValueError:
-        raise argparse.ArgumentTypeError(
-            "Value must be a number"
-        )
-
-    if number <= 0:
-        raise argparse.ArgumentTypeError(
-            "Value must be greater than zero"
-        )
-
-    return number
-
-
-def get_required_env(name: str) -> str:
+def get_env_int(name: str, default: int) -> int:
     value = os.getenv(name)
 
-    if value is None or not value.strip():
-        raise argparse.ArgumentTypeError(
-            f"Missing required environment variable: {name}. Check your .env"
-        )
+    if value is None:
+        return default
 
-    return value.strip()
+    try:
+        return int(value)
+    except ValueError as error:
+        raise ValueError(
+            f"Environment variable {name} must be an integer, got: {value!r}"
+        ) from error
 
+
+def get_env_float(name: str, default: float) -> float:
+    value = os.getenv(name)
+
+    if value is None:
+        return default
+
+    try:
+        return float(value)
+    except ValueError as error:
+        raise ValueError(
+            f"Environment variable {name} must be a number, got: {value!r}"
+        ) from error
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Bitcoin Fullnode Prometheus Exporter",
+        epilog="Config priority: CLI flags --> .env --> built-in defaults\n\n"
+    )
+
+    parser.add_argument(
+        "--bitcoin-rpc-ip",
+        default=None,
+        help=(
+            f"Bitcoin RPC host "
+            f"(default: {DEFAULT_BITCOIN_RPC_IP})"
+        ),
+    )
+
+    parser.add_argument(
+        "--bitcoin-rpc-port",
+        type=int,
+        default=None,
+        help=(
+            f"Bitcoin RPC port "
+            f"(default: {DEFAULT_BITCOIN_RPC_PORT})"
+        ),
+    )
+
+    parser.add_argument(
+        "--bitcoin-rpc-timeout",
+        type=float,
+        default=None,
+        help=(
+            f"Bitcoin RPC response timeout in seconds "
+            f"(default: {DEFAULT_BITCOIN_RPC_TIMEOUT})"
+        ),
+    )
+
+    parser.add_argument(
+        "--prometheus-host",
+        default=None,
+        help=(
+            f"Prometheus metrics bind host "
+            f"(default: {DEFAULT_PROMETHEUS_HOST})"
+        ),
+    )
+
+    parser.add_argument(
+        "--prometheus-port",
+        type=int,
+        default=None,
+        help=(
+            f"Prometheus metrics server port "
+            f"(default: {DEFAULT_PROMETHEUS_PORT})"
+        ),
+    )
+
+    parser.add_argument(
+        "--collect-interval",
+        type=float,
+        default=None,
+        help=(
+            f"Metrics collection interval in seconds "
+            f"(default: {DEFAULT_PROMETHEUS_COLLECT_INTERVAL})"
+        ),
+    )
+
+    parser.add_argument(
+        "--app-log-level",
+        default=None,
+        help=(
+            f"Application log level "
+            f"(default: {DEFAULT_APP_LOG_LEVEL})"
+        ),
+    )
+
+    return parser.parse_args()
+
+
+# ---------------------------------------------------------------------------
+# Config
+# ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class Config:
@@ -92,113 +161,93 @@ class Config:
         )
 
 
-def parse_config() -> Config:
-    parser = argparse.ArgumentParser(
-        description="Bitcoin full node Prometheus exporter",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+def load_config() -> Config:
+    args = parse_args()
+
+    bitcoin_rpc_username = os.getenv(
+        "BITCOIN_RPC_USERNAME",
+        "",
     )
 
-    parser.add_argument(
-        "--bitcoin-rpc-ip",
-        default=os.getenv(
+    bitcoin_rpc_password = os.getenv(
+        "BITCOIN_RPC_PASSWORD",
+        "",
+    )
+
+    bitcoin_rpc_ip = (
+        args.bitcoin_rpc_ip
+        if args.bitcoin_rpc_ip is not None
+        else os.getenv(
             "BITCOIN_RPC_IP",
-            "127.0.0.1",
-        ),
-        help="Bitcoin RPC host",
+            DEFAULT_BITCOIN_RPC_IP,
+        )
     )
 
-    parser.add_argument(
-        "--bitcoin-rpc-port",
-        type=validate_port,
-        default=validate_port(
-            os.getenv(
-                "BITCOIN_RPC_PORT",
-                "8332",
-            )
-        ),
-        help="Bitcoin RPC port",
+    bitcoin_rpc_port = (
+        args.bitcoin_rpc_port
+        if args.bitcoin_rpc_port is not None
+        else get_env_int(
+            "BITCOIN_RPC_PORT",
+            DEFAULT_BITCOIN_RPC_PORT,
+        )
     )
 
-    parser.add_argument(
-        "--bitcoin-rpc-timeout",
-        type=validate_positive_float,
-        default=validate_positive_float(
-            os.getenv(
-                "BITCOIN_RPC_TIMEOUT",
-                "10",
-            )
-        ),
-        help="Bitcoin RPC response timeout in seconds",
+    bitcoin_rpc_timeout = (
+        args.bitcoin_rpc_timeout
+        if args.bitcoin_rpc_timeout is not None
+        else get_env_float(
+            "BITCOIN_RPC_TIMEOUT",
+            DEFAULT_BITCOIN_RPC_TIMEOUT,
+        )
     )
 
-    parser.add_argument(
-        "--prometheus-host",
-        default=os.getenv(
+    prometheus_host = (
+        args.prometheus_host
+        if args.prometheus_host is not None
+        else os.getenv(
             "PROMETHEUS_HOST",
-            "127.0.0.1",
-        ),
-        help="Prometheus metrics bind host",
-    )
-
-    parser.add_argument(
-        "--prometheus-port",
-        type=validate_port,
-        default=validate_port(
-            os.getenv(
-                "PROMETHEUS_PORT",
-                "9091",
-            )
-        ),
-        help="Prometheus metrics server port",
-    )
-
-    parser.add_argument(
-        "--collect-interval",
-        type=validate_positive_float,
-        default=validate_positive_float(
-            os.getenv(
-                "PROMETHEUS_COLLECT_INTERVAL",
-                "15",
-            )
-        ),
-        help="Metrics collection interval in seconds",
-    )
-
-    parser.add_argument(
-        "--app-log-level",
-        type=validate_log_level,
-        default=validate_log_level(
-            os.getenv(
-                "APP_LOG_LEVEL",
-                "INFO",
-            )
-        ),
-        help="Application log level",
-    )
-
-    args = parser.parse_args()
-
-    try:
-        bitcoin_rpc_username = get_required_env(
-            "BITCOIN_RPC_USERNAME"
+            DEFAULT_PROMETHEUS_HOST,
         )
-        bitcoin_rpc_password = get_required_env(
-            "BITCOIN_RPC_PASSWORD"
+    )
+
+    prometheus_port = (
+        args.prometheus_port
+        if args.prometheus_port is not None
+        else get_env_int(
+            "PROMETHEUS_PORT",
+            DEFAULT_PROMETHEUS_PORT,
         )
-    except argparse.ArgumentTypeError as error:
-        parser.error(str(error))
+    )
+
+    prometheus_collect_interval = (
+        args.collect_interval
+        if args.collect_interval is not None
+        else get_env_float(
+            "PROMETHEUS_COLLECT_INTERVAL",
+            DEFAULT_PROMETHEUS_COLLECT_INTERVAL,
+        )
+    )
+
+    app_log_level = (
+        args.app_log_level
+        if args.app_log_level is not None
+        else os.getenv(
+            "APP_LOG_LEVEL",
+            DEFAULT_APP_LOG_LEVEL,
+        )
+    ).upper()
 
     return Config(
         bitcoin_rpc_username=bitcoin_rpc_username,
         bitcoin_rpc_password=bitcoin_rpc_password,
-        bitcoin_rpc_ip=args.bitcoin_rpc_ip,
-        bitcoin_rpc_port=args.bitcoin_rpc_port,
-        bitcoin_rpc_timeout=args.bitcoin_rpc_timeout,
-        prometheus_host=args.prometheus_host,
-        prometheus_port=args.prometheus_port,
-        prometheus_collect_interval=args.collect_interval,
-        app_log_level=args.app_log_level,
+        bitcoin_rpc_ip=bitcoin_rpc_ip,
+        bitcoin_rpc_port=bitcoin_rpc_port,
+        bitcoin_rpc_timeout=bitcoin_rpc_timeout,
+        prometheus_host=prometheus_host,
+        prometheus_port=prometheus_port,
+        prometheus_collect_interval=prometheus_collect_interval,
+        app_log_level=app_log_level,
     )
 
 
-config = parse_config()
+config = load_config()

@@ -68,17 +68,14 @@ def create_metrics_app() -> Callable:
         if environ.get("PATH_INFO") == "/metrics":
             return metrics_app(environ, start_response)
 
-        body = b"Not Found\n"
-
         start_response(
             "404 Not Found",
             [
-                ("Content-Type", "text/plain; charset=utf-8"),
-                ("Content-Length", str(len(body))),
+                ("Content-Length", "0"),
             ],
         )
 
-        return [body]
+        return [b""]
 
     return app
 
