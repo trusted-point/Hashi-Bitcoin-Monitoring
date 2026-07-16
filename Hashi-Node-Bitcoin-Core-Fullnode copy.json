@@ -75,7 +75,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -127,7 +127,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "uptime{alias=\"$hashi_alias\"}",
+          "expr": "uptime{alias=\"testnet\"}",
           "legendFormat": "{{version}}",
           "range": true,
           "refId": "A"
@@ -139,7 +139,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -210,7 +210,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_paused{alias=\"$hashi_alias\"}",
+          "expr": "hashi_paused{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -222,7 +222,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -274,7 +274,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_sui_epoch{alias=\"$hashi_alias\"}",
+          "expr": "hashi_sui_epoch{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -286,7 +286,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -338,7 +338,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_latest_checkpoint_height{alias=\"$hashi_alias\"}",
+          "expr": "hashi_latest_checkpoint_height{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -350,7 +350,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "Number of connected Bitcoin P2P peers. A value of 0 means no peers are connected; check trusted peer configuration and network reachability.",
       "fieldConfig": {
@@ -407,7 +407,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_connected_peers{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_connected_peers{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -419,7 +419,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "Indicates whether Hashi is currently reconfiguring the MPC committee. If it remains active for more than 10 minutes, check DKG/rotation logs for errors.",
       "fieldConfig": {
@@ -477,7 +477,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_reconfig_in_progress{alias=\"$hashi_alias\"}",
+          "expr": "hashi_reconfig_in_progress{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -489,7 +489,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -542,7 +542,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "uptime{alias=\"$hashi_alias\"}",
+          "expr": "uptime{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -554,7 +554,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -611,7 +611,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_guardian_enabled{alias=\"$hashi_alias\"}",
+          "expr": "hashi_guardian_enabled{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -623,7 +623,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -675,7 +675,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_epoch{alias=\"$hashi_alias\"}",
+          "expr": "hashi_epoch{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -687,7 +687,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -739,7 +739,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_best_height{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_best_height{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -751,7 +751,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "Indicates whether the Kyoto Bitcoin light client is synced. If unsynced for more than 5 minutes, check Bitcoin RPC and P2P connectivity.",
       "fieldConfig": {
@@ -809,7 +809,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_synced{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_synced{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -821,7 +821,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "Total number of MPC signing failures since the node process started. Any increase may indicate MPC protocol issues and should be investigated in the logs.",
       "fieldConfig": {
@@ -878,7 +878,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(hashi_mpc_sign_failures_total{alias=\"$hashi_alias\"}[1h])",
+          "expr": "increase(hashi_mpc_sign_failures_total{alias=\"testnet\"}[1h])",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -890,7 +890,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -957,7 +957,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_is_leader{alias=\"$hashi_alias\"}",
+          "expr": "hashi_is_leader{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -969,7 +969,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1026,7 +1026,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_screener_enabled{alias=\"$hashi_alias\"}",
+          "expr": "hashi_screener_enabled{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1038,7 +1038,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1090,7 +1090,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_guardian_current_committee_epoch{alias=\"$hashi_alias\"}",
+          "expr": "hashi_guardian_current_committee_epoch{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1102,7 +1102,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1154,7 +1154,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum(hashi_proposals{alias=\"$hashi_alias\"})",
+          "expr": "sum(hashi_proposals{alias=\"testnet\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1166,7 +1166,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "Percentage of Kyoto Bitcoin light client synchronization progress. 100% indicates the Kyoto light client is fully synced.",
       "fieldConfig": {
@@ -1224,7 +1224,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_sync_percent{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_sync_percent{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1236,7 +1236,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "Number of presignatures currently available in the local MPC signing pool. A value of 0 means the node cannot sign. Check reconfig status and MPC logs.",
       "fieldConfig": {
@@ -1293,7 +1293,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_presig_pool_remaining{alias=\"$hashi_alias\"}",
+          "expr": "hashi_presig_pool_remaining{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1305,7 +1305,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1387,7 +1387,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_best_height{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_best_height{alias=\"testnet\"}",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -1399,7 +1399,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1480,7 +1480,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "rate(hashi_latest_checkpoint_height{alias=\"$hashi_alias\"}[5m])",
+          "expr": "rate(hashi_latest_checkpoint_height{alias=\"testnet\"}[5m])",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -1492,7 +1492,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1573,7 +1573,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum(\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[5m]\n  )\n)",
+          "expr": "sum(rate(hashi_sui_tx_submissions_total{alias=\"testnet\"}[5m]))",
           "hide": false,
           "legendFormat": "total",
           "range": true,
@@ -1582,10 +1582,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[5m]\n  )\n)",
+          "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"testnet\",\n    }[5m]\n  )\n)",
           "hide": false,
           "legendFormat": "{{operation}} - {{status}}",
           "range": true,
@@ -1677,10 +1677,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "sum(\n  increase(\n    hashi_leader_retries_total{\n      alias=\"$hashi_alias\"\n    }[1h]\n  )\n)",
+          "expr": "sum(\n  increase(\n    hashi_leader_retries_total{\n      alias=\"testnet\"\n    }[1h]\n  )\n)",
           "hide": false,
           "legendFormat": "total",
           "range": true,
@@ -1692,7 +1692,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum by (operation, error_kind) (\n  increase(\n    hashi_leader_retries_total{\n      alias=\"$hashi_alias\",\n    }[1h]\n  )\n)",
+          "expr": "sum by (operation, error_kind) (\n  increase(\n    hashi_leader_retries_total{\n      alias=\"testnet\",\n    }[1h]\n  )\n)",
           "hide": false,
           "legendFormat": "{{operation}} - {{error_kind}}",
           "range": true,
@@ -1705,7 +1705,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1786,7 +1786,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum(\n  rate(\n    hashi_requests{\n      alias=\"$hashi_alias\"\n    }[5m]\n  )\n)",
+          "expr": "sum(\n  rate(\n    hashi_requests{\n      alias=\"testnet\"\n    }[5m]\n  )\n)",
           "hide": false,
           "legendFormat": "total",
           "range": true,
@@ -1795,10 +1795,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "sum by (status, path) (\n  rate(\n    hashi_requests{\n      alias=\"$hashi_alias\"\n      }[5m]\n  )\n)",
+          "expr": "sum by (status, path) (\n  rate(\n    hashi_requests{\n      alias=\"testnet\"\n      }[5m]\n  )\n)",
           "hide": false,
           "legendFormat": "{{status}} - {{path}}",
           "range": true,
@@ -1890,10 +1890,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "sum(\n  increase(\n    hashi_kyoto_warnings_total{\n      alias=\"$hashi_alias\"\n    }[1h]\n  )\n)",
+          "expr": "sum(\n  increase(\n    hashi_kyoto_warnings_total{\n      alias=\"testnet\"\n    }[1h]\n  )\n)",
           "legendFormat": "total",
           "range": true,
           "refId": "A"
@@ -1904,7 +1904,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_kyoto_warnings_total{\n    alias=\"$hashi_alias\"\n  }[1h]\n)",
+          "expr": "increase(\n  hashi_kyoto_warnings_total{\n    alias=\"testnet\"\n  }[1h]\n)",
           "hide": false,
           "legendFormat": "{{type}}",
           "range": true,
@@ -1917,7 +1917,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -1999,7 +1999,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_proposals{alias=\"$hashi_alias\"}",
+          "expr": "hashi_proposals{alias=\"testnet\"}",
           "legendFormat": "{{type}}",
           "range": true,
           "refId": "A"
@@ -2011,7 +2011,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2093,7 +2093,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "rate(\n  hashi_request_latency_sum{\n    alias=\"$hashi_alias\",\n    path!=\"unknown\"\n  }[5m]\n)\n/\nrate(\n  hashi_request_latency_count{\n    alias=\"$hashi_alias\",\n    path!=\"unknown\"\n  }[5m]\n)",
+          "expr": "rate(\n  hashi_request_latency_sum{\n    alias=\"testnet\",\n    path!=\"unknown\"\n  }[5m]\n)\n/\nrate(\n  hashi_request_latency_count{\n    alias=\"testnet\",\n    path!=\"unknown\"\n  }[5m]\n)",
           "legendFormat": "{{path}}",
           "range": true,
           "refId": "A"
@@ -2105,7 +2105,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "description": "50th, 95th, and 99th percentile durations of MPC reconfiguration operations, including DKG and rotation.",
       "fieldConfig": {
@@ -2188,7 +2188,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(\n  0.50,\n  sum by (le) (\n    rate(\n      hashi_mpc_reconfig_total_duration_seconds_bucket{\n        alias=\"$hashi_alias\"\n      }[5m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.50,\n  sum by (le) (\n    rate(\n      hashi_mpc_reconfig_total_duration_seconds_bucket{\n        alias=\"testnet\"\n      }[5m]\n    )\n  )\n)",
           "legendFormat": "p50",
           "range": true,
           "refId": "A"
@@ -2196,10 +2196,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(\n  0.95,\n  sum by (le) (\n    rate(\n      hashi_mpc_reconfig_total_duration_seconds_bucket{\n        alias=\"$hashi_alias\"\n      }[5m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.95,\n  sum by (le) (\n    rate(\n      hashi_mpc_reconfig_total_duration_seconds_bucket{\n        alias=\"testnet\"\n      }[5m]\n    )\n  )\n)",
           "hide": false,
           "legendFormat": "p95",
           "range": true,
@@ -2211,7 +2211,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(\n  0.99,\n  sum by (le) (\n    rate(\n      hashi_mpc_reconfig_total_duration_seconds_bucket{\n        alias=\"$hashi_alias\"\n      }[5m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.99,\n  sum by (le) (\n    rate(\n      hashi_mpc_reconfig_total_duration_seconds_bucket{\n        alias=\"testnet\"\n      }[5m]\n    )\n  )\n)",
           "hide": false,
           "legendFormat": "p99",
           "range": true,
@@ -2224,7 +2224,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2276,7 +2276,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_num_consumed_presigs{alias=\"$hashi_alias\"}",
+          "expr": "hashi_num_consumed_presigs{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2288,7 +2288,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2340,7 +2340,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_mpc_recovery_suspicious_total{alias=\"$hashi_alias\"}",
+          "expr": "hashi_mpc_recovery_suspicious_total{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2352,7 +2352,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2405,7 +2405,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_btc_fee_rate_sat_per_kvb{\n  alias=\"$hashi_alias\"\n} / 1000",
+          "expr": "hashi_btc_fee_rate_sat_per_kvb{\n  alias=\"testnet\"\n} / 1000",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2417,7 +2417,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2469,7 +2469,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_reorgs_total{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_reorgs_total{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2481,7 +2481,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2533,7 +2533,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_restarts_total{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_restarts_total{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2545,7 +2545,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2597,7 +2597,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_consecutive_failures{alias=\"$hashi_alias\"}",
+          "expr": "hashi_kyoto_consecutive_failures{alias=\"testnet\"}",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -2623,7 +2623,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2675,7 +2675,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_deposits_confirmed_total{\n    alias=\"$hashi_alias\"\n  }[24h]\n)",
+          "expr": "increase(\n  hashi_deposits_confirmed_total{\n    alias=\"testnet\"\n  }[24h]\n)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2687,7 +2687,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2739,7 +2739,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_withdrawals_finalized_total{\n    alias=\"$hashi_alias\"\n  }[24h]\n)",
+          "expr": "increase(\n  hashi_withdrawals_finalized_total{\n    alias=\"testnet\"\n  }[24h]\n)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2751,7 +2751,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2803,7 +2803,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_deposits_rejected_utxo_spent_total{\n    alias=\"$hashi_alias\"\n  }[24h]\n)",
+          "expr": "increase(\n  hashi_deposits_rejected_utxo_spent_total{\n    alias=\"testnet\"\n  }[24h]\n)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2815,7 +2815,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2867,7 +2867,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_deposit_queue_size{alias=\"$hashi_alias\"}",
+          "expr": "hashi_deposit_queue_size{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2879,7 +2879,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2931,7 +2931,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum(\n  hashi_withdrawal_queue_size{\n    alias=\"$hashi_alias\"\n  }\n)",
+          "expr": "sum(\n  hashi_withdrawal_queue_size{\n    alias=\"testnet\"\n  }\n)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2943,7 +2943,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -2995,7 +2995,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_never_retry_deposit_ids{alias=\"$hashi_alias\"}",
+          "expr": "hashi_never_retry_deposit_ids{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -3007,7 +3007,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3089,7 +3089,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_deposit_request_confirmations{alias=\"$hashi_alias\"}",
+          "expr": "hashi_deposit_request_confirmations{alias=\"testnet\"}",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -3110,7 +3110,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3191,7 +3191,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_utxo_pool_value{alias=\"$hashi_alias\"} / 100000000",
+          "expr": "hashi_utxo_pool_value{alias=\"testnet\"} / 100000000",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -3212,7 +3212,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3294,7 +3294,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_withdrawal_queue_size{alias=\"$hashi_alias\"}",
+          "expr": "hashi_withdrawal_queue_size{alias=\"testnet\"}",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -3306,7 +3306,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3388,7 +3388,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_utxo_pool_size{alias=\"$hashi_alias\"}",
+          "expr": "hashi_utxo_pool_size{alias=\"testnet\"}",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
@@ -3422,7 +3422,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3475,7 +3475,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_package_version_enabled{alias=\"$hashi_alias\"}",
+          "expr": "hashi_package_version_enabled{alias=\"testnet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -3487,7 +3487,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3539,7 +3539,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_package_version_enabled{alias=\"$hashi_alias\"}",
+          "expr": "hashi_package_version_enabled{alias=\"testnet\"}",
           "legendFormat": "{{version}}",
           "range": true,
           "refId": "A"
@@ -3551,7 +3551,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3603,7 +3603,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "uptime{alias=\"$hashi_alias\"}",
+          "expr": "uptime{alias=\"testnet\"}",
           "legendFormat": "{{bitcoin_chain_id}}",
           "range": true,
           "refId": "A"
@@ -3615,7 +3615,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3667,7 +3667,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "uptime{alias=\"$hashi_alias\"}",
+          "expr": "uptime{alias=\"testnet\"}",
           "legendFormat": "{{package_id}}",
           "range": true,
           "refId": "A"
@@ -3679,7 +3679,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3731,7 +3731,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "uptime{alias=\"$hashi_alias\"}",
+          "expr": "uptime{alias=\"testnet\"}",
           "legendFormat": "{{sui_chain_id}}",
           "range": true,
           "refId": "A"
@@ -3743,7 +3743,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3795,7 +3795,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "uptime{alias=\"$hashi_alias\"}",
+          "expr": "uptime{alias=\"testnet\"}",
           "legendFormat": "{{hashi_object_id}}",
           "range": true,
           "refId": "A"
@@ -3820,7 +3820,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3872,7 +3872,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_info{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_info{alias=\"signet\"}",
           "legendFormat": "{{version}}",
           "range": true,
           "refId": "A"
@@ -3884,7 +3884,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -3936,7 +3936,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_info{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_info{alias=\"signet\"}",
           "legendFormat": "{{chain}}",
           "range": true,
           "refId": "A"
@@ -3948,7 +3948,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -4005,7 +4005,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_rpc_available{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_rpc_available{alias=\"signet\"}",
           "legendFormat": "{{version}}",
           "range": true,
           "refId": "A"
@@ -4017,7 +4017,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -4074,7 +4074,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_feature_enabled{alias=\"$bitcoin_alias\", feature=\"txindex\"}",
+          "expr": "bitcoin_node_feature_enabled{alias=\"signet\", feature=\"txindex\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4086,7 +4086,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -4144,7 +4144,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_index_synced{alias=\"$bitcoin_alias\", index=\"blockfilterindex\"}",
+          "expr": "bitcoin_node_index_synced{alias=\"signet\", index=\"blockfilterindex\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4156,7 +4156,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -4227,7 +4227,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_pruned{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_pruned{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4239,7 +4239,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -4292,7 +4292,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_uptime_seconds{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_uptime_seconds{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4304,7 +4304,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -4358,7 +4358,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "bitcoin_node_latest_block_timestamp_seconds{alias=\"$bitcoin_alias\"} * 1000",
+          "expr": "bitcoin_node_latest_block_timestamp_seconds{alias=\"signet\"} * 1000",
           "hide": false,
           "instant": true,
           "legendFormat": "__auto",
@@ -4368,11 +4368,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "clamp_min(\n  time() -\n  bitcoin_node_latest_block_timestamp_seconds{\n    alias=\"$bitcoin_alias\"\n  },\n  0\n)",
+          "expr": "clamp_min(\n  time() -\n  bitcoin_node_latest_block_timestamp_seconds{\n    alias=\"signet\"\n  },\n  0\n)",
           "hide": true,
           "instant": true,
           "legendFormat": "__auto",
@@ -4440,10 +4440,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_block_height{\n  alias=\"$bitcoin_alias\"\n}\n/\nbitcoin_node_header_height{\n  alias=\"$bitcoin_alias\"\n}",
+          "expr": "bitcoin_node_block_height{\n  alias=\"signet\"\n}\n/\nbitcoin_node_header_height{\n  alias=\"signet\"\n}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4510,10 +4510,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_index_synced{alias=\"$bitcoin_alias\", index=\"txindex\"}",
+          "expr": "bitcoin_node_index_synced{alias=\"signet\", index=\"txindex\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4579,10 +4579,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_feature_enabled{alias=\"$bitcoin_alias\", feature=\"blockfilterindex\"}",
+          "expr": "bitcoin_node_feature_enabled{alias=\"signet\", feature=\"blockfilterindex\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4648,10 +4648,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_feature_enabled{alias=\"$bitcoin_alias\", feature=\"peerblockfilters\"}",
+          "expr": "bitcoin_node_feature_enabled{alias=\"signet\", feature=\"peerblockfilters\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4714,10 +4714,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_chain_size_bytes{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_chain_size_bytes{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4778,10 +4778,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_block_height{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_block_height{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4846,10 +4846,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_peers_total{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_peers_total{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4914,10 +4914,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_block_height{\n  alias=\"$bitcoin_alias\"\n}\n-\nignoring(index)\nbitcoin_node_index_height{\n  alias=\"$bitcoin_alias\",\n  index=\"txindex\"\n}",
+          "expr": "bitcoin_node_block_height{\n  alias=\"signet\"\n}\n-\nignoring(index)\nbitcoin_node_index_height{\n  alias=\"signet\",\n  index=\"txindex\"\n}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -4982,10 +4982,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_block_height{\n  alias=\"$bitcoin_alias\"\n}\n-\nignoring(index)\nbitcoin_node_index_height{\n  alias=\"$bitcoin_alias\",\n  index=\"blockfilterindex\"\n}",
+          "expr": "bitcoin_node_block_height{\n  alias=\"signet\"\n}\n-\nignoring(index)\nbitcoin_node_index_height{\n  alias=\"signet\",\n  index=\"blockfilterindex\"\n}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5050,10 +5050,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_header_height{alias=\"$bitcoin_alias\"}\n-\nbitcoin_node_block_height{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_header_height{alias=\"signet\"}\n-\nbitcoin_node_block_height{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5144,10 +5144,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_block_height{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_block_height{alias=\"signet\"}",
           "legendFormat": "block-height",
           "range": true,
           "refId": "A"
@@ -5158,7 +5158,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_header_height{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_header_height{alias=\"signet\"}",
           "hide": false,
           "legendFormat": "header-height",
           "range": true,
@@ -5167,10 +5167,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_index_height{alias=\"$bitcoin_alias\", index=\"blockfilterindex\"}",
+          "expr": "bitcoin_node_index_height{alias=\"signet\", index=\"blockfilterindex\"}",
           "hide": false,
           "legendFormat": "block-filter-index",
           "range": true,
@@ -5182,7 +5182,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_index_height{alias=\"$bitcoin_alias\", index=\"txindex\"}",
+          "expr": "bitcoin_node_index_height{alias=\"signet\", index=\"txindex\"}",
           "hide": false,
           "legendFormat": "tx-index",
           "range": true,
@@ -5195,7 +5195,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -5276,7 +5276,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(bitcoin_node_block_height{alias=\"$bitcoin_alias\"}[1h])",
+          "expr": "increase(bitcoin_node_block_height{alias=\"signet\"}[1h])",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5288,7 +5288,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -5371,7 +5371,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_network_hash_rate_hashes_per_second{\n  alias=\"$bitcoin_alias\",\n  window=\"12_blocks\"\n}",
+          "expr": "bitcoin_network_hash_rate_hashes_per_second{\n  alias=\"signet\",\n  window=\"12_blocks\"\n}",
           "hide": false,
           "legendFormat": "12-blocks",
           "range": true,
@@ -5380,10 +5380,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_network_hash_rate_hashes_per_second{\n  alias=\"$bitcoin_alias\",\n  window=\"120_blocks\"\n}",
+          "expr": "bitcoin_network_hash_rate_hashes_per_second{\n  alias=\"signet\",\n  window=\"120_blocks\"\n}",
           "hide": false,
           "legendFormat": "120-blocks",
           "range": true,
@@ -5395,7 +5395,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_network_hash_rate_hashes_per_second{\n  alias=\"$bitcoin_alias\",\n  window=\"2016_blocks\"\n}",
+          "expr": "bitcoin_network_hash_rate_hashes_per_second{\n  alias=\"signet\",\n  window=\"2016_blocks\"\n}",
           "hide": false,
           "legendFormat": "2016-blocks",
           "range": true,
@@ -5408,7 +5408,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "eec6w0gfiznk0e"
       },
       "fieldConfig": {
         "defaults": {
@@ -5490,7 +5490,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_peers_total{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_peers_total{alias=\"signet\"}",
           "hide": false,
           "legendFormat": "total",
           "range": true,
@@ -5499,10 +5499,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_peers_inbound{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_peers_inbound{alias=\"signet\"}",
           "hide": false,
           "legendFormat": "inbound",
           "range": true,
@@ -5514,7 +5514,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_peers_outbound{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_peers_outbound{alias=\"signet\"}",
           "hide": false,
           "legendFormat": "outbound",
           "range": true,
@@ -5523,10 +5523,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_banned_peers{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_banned_peers{alias=\"signet\"}",
           "hide": false,
           "legendFormat": "banned",
           "range": true,
@@ -5618,10 +5618,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_estimated_fee_btc_per_kvb{alias=\"$bitcoin_alias\"} * 100000",
+          "expr": "bitcoin_node_estimated_fee_btc_per_kvb{alias=\"signet\"} * 100000",
           "hide": false,
           "legendFormat": "{{target_blocks}}-blocks",
           "range": true,
@@ -5683,10 +5683,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_latest_block_fees_btc{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_latest_block_fees_btc{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5747,10 +5747,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_latest_block_transactions{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_latest_block_transactions{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5812,10 +5812,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_chain_transactions{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_chain_transactions{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5877,10 +5877,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_mempool_memory_bytes{alias=\"$bitcoin_alias\"}\n/\nbitcoin_node_mempool_limit_bytes{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_mempool_memory_bytes{alias=\"signet\"}\n/\nbitcoin_node_mempool_limit_bytes{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -5943,10 +5943,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_mempool_size_bytes{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_mempool_size_bytes{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -6007,10 +6007,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "eec6w0gfiznk0e"
           },
           "editorMode": "code",
-          "expr": "bitcoin_node_mempool_transactions{alias=\"$bitcoin_alias\"}",
+          "expr": "bitcoin_node_mempool_transactions{alias=\"signet\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -6064,7 +6064,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "eec6w0gfiznk0e"
         },
         "definition": "label_values(bitcoin_node_info,alias)",
         "description": "",
@@ -6091,6 +6091,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "cfs7kd6qetjwgc",
-  "version": 26,
+  "version": 25,
   "weekStart": ""
 }
