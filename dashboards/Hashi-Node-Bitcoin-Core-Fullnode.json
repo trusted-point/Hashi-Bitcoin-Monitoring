@@ -1240,10 +1240,22 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_mpc_sign_failures_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "expr": "rate(\n  hashi_mpc_sign_failures_total{\n    alias=\"$hashi_alias\"\n  }[$__rate_interval]\n)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "increase(\n  hashi_mpc_sign_failures_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "❗MPC Sign Failures❗",
@@ -8796,9 +8808,9 @@
   "refresh": "5s",
   "schemaVersion": 40,
   "tags": [
+    "hashi",
     "bitcoin",
-    "fullnode",
-    "hashi"
+    "sui"
   ],
   "templating": {
     "list": [
@@ -8864,6 +8876,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 16,
+  "version": 21,
   "weekStart": ""
 }
