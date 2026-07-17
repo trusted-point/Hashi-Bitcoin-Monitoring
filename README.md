@@ -46,6 +46,8 @@ Download the required `.json` file and import it into Grafana.
 | `datasource="$datasource"` | Grafana variable of type `Data source` with data source type `Prometheus` |
 | `hashi_alias="$hashi_alias"` | Auto-populated from `label_values(hashi_epoch, alias)` |
 | `bitcoin_alias="$bitcoin_alias"` | Auto-populated from `label_values(bitcoin_node_info, alias)` |
+| `$__range` | Built-in Grafana variable representing the currently selected dashboard time range |
+| `$__rate_interval` | Built-in Grafana variable that automatically selects a safe interval for Prometheus `rate()` queries |
 
 ## 📂 Bitcoin Fullnode Metrics Exporter
 ### Features
