@@ -2032,14 +2032,14 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum by (operation, error_kind) (\n  increase(\n    hashi_leader_retries_total{\n      alias=\"$hashi_alias\"\n    }[$__range]\n  )\n)",
+          "expr": "(\n  sum by (operation, error_kind) (\n    increase(\n      hashi_leader_retries_total{\n        alias=\"$hashi_alias\"\n      }[$__range]\n    )\n  ) > 0\n)\nor\nsum by (operation, error_kind) (\n  increase(\n    hashi_leader_retries_total{\n      alias=\"$hashi_alias\"\n    }[24h]\n  )\n)",
           "hide": false,
           "legendFormat": "{{operation}} - {{error_kind}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Leader Retries",
+      "title": "Leader Retries [$__range / 24h Fallback]",
       "type": "timeseries"
     },
     {
@@ -2126,14 +2126,26 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[$__rate_interval]\n  )\n)",
+          "expr": "(\n  sum by (operation, status) (\n    rate(\n      hashi_sui_tx_submissions_total{\n        alias=\"$hashi_alias\"\n      }[$__rate_interval]\n    )\n  ) > 0\n)\nor\nsum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[24h]\n  )\n)",
           "hide": false,
-          "legendFormat": "{{operation}} - {{status}}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[$__rate_interval]\n  )\n)",
+          "hide": true,
+          "legendFormat": "{{operation}} - {{status}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Sui TX Submission Rate",
+      "title": "Sui TX Submission Rate [$__range / 24h Fallback]",
       "type": "timeseries"
     },
     {
@@ -5890,7 +5902,7 @@
       },
       "id": 128,
       "panels": [],
-      "title": "Hashi Node [MPC Protocol Durations for Selected Range or 24h Fallback]",
+      "title": "Hashi Node [MPC Protocol Durations for $__range or 24h Fallback]",
       "type": "row"
     },
     {
@@ -8852,6 +8864,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 10,
+  "version": 15,
   "weekStart": ""
 }
