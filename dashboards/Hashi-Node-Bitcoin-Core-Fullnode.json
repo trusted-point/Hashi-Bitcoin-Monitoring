@@ -4993,13 +4993,25 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_deposits_confirmed_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "expr": "(\n  increase(\n    hashi_deposits_confirmed_total{\n    alias=\"$hashi_alias\"\n    }[$__range]\n  ) > 0\n)\nor\nincrease(\n  hashi_deposits_confirmed_total{\n    alias=\"$hashi_alias\"\n  }[24h]\n)",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "increase(\n  hashi_deposits_confirmed_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "hide": true,
+          "legendFormat": "{{status}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Confirmed Deposits",
+      "title": "Confirmed Deposits [$__range / 24h Fallback]",
       "type": "timeseries"
     },
     {
@@ -5087,13 +5099,25 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_withdrawals_finalized_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "expr": "(\n  increase(\n    hashi_withdrawals_finalized_total{\n    alias=\"$hashi_alias\"\n    }[$__range]\n  ) > 0\n)\nor\nincrease(\n  hashi_withdrawals_finalized_total{\n    alias=\"$hashi_alias\"\n  }[24h]\n)",
           "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "increase(\n  hashi_withdrawals_finalized_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "hide": true,
+          "legendFormat": "{{status}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Finalized Withdrawals",
+      "title": "Finalized Withdrawals [$__range / 24h Fallback]",
       "type": "timeseries"
     },
     {
@@ -8876,6 +8900,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 21,
+  "version": 23,
   "weekStart": ""
 }
