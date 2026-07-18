@@ -1097,7 +1097,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Total number of MPC signing failures since the node process started. Any increase may indicate MPC protocol issues and should be investigated in the logs.",
+      "description": "Rate of MPC signing failures per second over the selected interval. Any sustained non-zero value indicates repeated signing issues.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1156,21 +1156,9 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "increase(\n  hashi_mpc_sign_failures_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
-          "hide": true,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B"
         }
       ],
-      "title": "❗MPC Sign Failures❗",
+      "title": "❗MPC Signing Failure Rate❗",
       "type": "stat"
     },
     {
@@ -10244,6 +10232,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 71,
+  "version": 72,
   "weekStart": ""
 }
