@@ -9365,6 +9365,7 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -9406,13 +9407,25 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(bitcoin_node_block_height{alias=\"$bitcoin_alias\"}[1h])",
+          "expr": "increase(bitcoin_node_block_height{alias=\"$bitcoin_alias\"}[$__range])",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "increase(bitcoin_node_block_height{alias=\"$bitcoin_alias\"}[1h])",
+          "hide": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Blocks Rate [1h]",
+      "title": "Blocks Processed",
       "type": "timeseries"
     },
     {
@@ -10221,6 +10234,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 78,
+  "version": 80,
   "weekStart": ""
 }
