@@ -3105,7 +3105,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "ercentage of outbound Guardian RPC calls completed successfully over the last 5 minutes. 100% means all calls succeeded.",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3180,7 +3180,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Portion of the Guardian limiter’s maximum Bitcoin withdrawal capacity currently available. 100% means fully available; 0% means no capacity remains",
+      "description": "Portion of the Guardian limiter’s maximum Bitcoin withdrawal capacity currently available.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3377,7 +3377,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Shows whether the local Guardian limiter has been initialized from the Guardian state. 1 means initialized; 0 means not initialized.",
+      "description": "Shows whether the local Guardian limiter has been initialized from the Guardian state.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3448,7 +3448,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Indicates whether the local Guardian limiter has lost synchronization with the Guardian. 0 means in sync; 1 means drift detected and requires investigation or restart.",
+      "description": "Indicates whether the local Guardian limiter has lost synchronization with the Guardian.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -10232,6 +10232,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 75,
+  "version": 76,
   "weekStart": ""
 }
