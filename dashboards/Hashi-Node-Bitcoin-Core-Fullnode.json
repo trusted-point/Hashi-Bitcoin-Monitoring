@@ -4250,8 +4250,9 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_guardian_limiter_anchor_events_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
-          "legendFormat": "total",
+          "expr": "increase(\n  hashi_guardian_limiter_apply_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
+          "hide": false,
+          "legendFormat": "applied",
           "range": true,
           "refId": "A"
         },
@@ -4261,23 +4262,11 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "increase(\n  hashi_guardian_limiter_apply_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
-          "hide": false,
-          "legendFormat": "applied",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
           "expr": "increase(\n  hashi_guardian_limiter_anchor_events_skipped_total{\n    alias=\"$hashi_alias\"\n  }[$__range]\n)",
           "hide": false,
           "legendFormat": "skipped",
           "range": true,
-          "refId": "C"
+          "refId": "B"
         }
       ],
       "title": "Guardian Limiter Anchor Events",
@@ -4286,7 +4275,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS-1}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4364,7 +4353,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
           "expr": "hashi_guardian_limiter_refill_rate_sats_per_sec{\n  alias=\"$hashi_alias\"\n} / 1e8",
@@ -4379,7 +4368,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS-1}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -10232,6 +10221,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 76,
+  "version": 77,
   "weekStart": ""
 }
