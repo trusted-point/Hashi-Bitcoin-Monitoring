@@ -2188,8 +2188,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "#ffffff",
+                "value": 10
               }
             ]
           }
@@ -10157,6 +10165,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 94,
+  "version": 96,
   "weekStart": ""
 }
