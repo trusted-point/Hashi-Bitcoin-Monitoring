@@ -7354,32 +7354,7 @@
           },
           "unit": "s"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "key_rotation"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -7409,7 +7384,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "(\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_end_reconfig_duration_seconds_sum{\n          alias=\"$hashi_alias\"\n        }[$__range]\n      )\n    )\n    /\n    sum by (protocol) (\n      increase(\n        hashi_mpc_end_reconfig_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[$__range]\n      )\n    )\n  )\n  and on (protocol)\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_end_reconfig_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[$__range]\n      )\n    ) > 0\n  )\n)\nor\n(\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_end_reconfig_duration_seconds_sum{\n          alias=\"$hashi_alias\"\n        }[24h]\n      )\n    )\n    /\n    sum by (protocol) (\n      increase(\n        hashi_mpc_end_reconfig_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[24h]\n      )\n    )\n  )\n  and on (protocol)\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_end_reconfig_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[24h]\n      )\n    ) > 0\n  )\n)",
+          "expr": "(\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_cert_verify_duration_seconds_sum{\n          alias=\"$hashi_alias\"\n        }[$__range]\n      )\n    )\n    /\n    sum by (protocol) (\n      increase(\n        hashi_mpc_cert_verify_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[$__range]\n      )\n    )\n  )\n  and on (protocol)\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_cert_verify_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[$__range]\n      )\n    ) > 0\n  )\n)\nor\n(\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_cert_verify_duration_seconds_sum{\n          alias=\"$hashi_alias\"\n        }[24h]\n      )\n    )\n    /\n    sum by (protocol) (\n      increase(\n        hashi_mpc_cert_verify_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[24h]\n      )\n    )\n  )\n  and on (protocol)\n  (\n    sum by (protocol) (\n      increase(\n        hashi_mpc_cert_verify_duration_seconds_count{\n          alias=\"$hashi_alias\"\n        }[24h]\n      )\n    ) > 0\n  )\n)",
           "legendFormat": "{{protocol}}",
           "range": true,
           "refId": "A"
@@ -7420,14 +7395,14 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by (protocol) (\n  increase(\n    hashi_mpc_end_reconfig_duration_seconds_sum{\n      alias=\"$hashi_alias\"\n    }[$__range]\n  )\n)\n/\nsum by (protocol) (\n  increase(\n    hashi_mpc_end_reconfig_duration_seconds_count{\n      alias=\"$hashi_alias\"\n    }[$__range]\n  )\n)",
+          "expr": "sum by (protocol) (\n  increase(\n    hashi_mpc_completion_duration_seconds_sum{\n      alias=\"$hashi_alias\"\n    }[$__range]\n  )\n)\n/\nsum by (protocol) (\n  increase(\n    hashi_mpc_completion_duration_seconds_count{\n      alias=\"$hashi_alias\"\n    }[$__range]\n  )\n)",
           "hide": true,
           "legendFormat": "{{protocol}}",
           "range": true,
           "refId": "B"
         }
       ],
-      "title": "MPC End Reconfig Duration",
+      "title": "MPC Certificate Verification Duration",
       "type": "timeseries"
     },
     {
@@ -10246,6 +10221,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 84,
+  "version": 85,
   "weekStart": ""
 }
