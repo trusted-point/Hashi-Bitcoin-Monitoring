@@ -2012,7 +2012,7 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "(\n  sum by (operation, status) (\n    increase(\n      hashi_sui_tx_submissions_total{\n        alias=\"$hashi_alias\"\n      }[$__range]\n    )\n  ) > 0\n)\nor\nsum by (operation, status) (\n  increase(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[24h]\n  )\n)",
+          "expr": "(\n  sum by (operation, status) (\n    increase(\n      hashi_sui_tx_submissions_total{\n        alias=\"$hashi_alias\",\n        status=\"success\"\n      }[$__range]\n    )\n  ) > 0\n)\nor\nsum by (operation, status) (\n  increase(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\",\n      status=\"success\"\n    }[24h]\n  )\n)",
           "hide": false,
           "legendFormat": "{{status}} - {{operation}}",
           "range": true,
@@ -2024,11 +2024,23 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
+          "expr": "(\n  sum by (operation, status) (\n    increase(\n      hashi_sui_tx_submissions_total{\n        alias=\"$hashi_alias\",\n        status!=\"success\"\n      }[$__range]\n    )\n  ) > 0\n)\nor\nsum by (operation, status) (\n  increase(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\",\n      status!=\"success\"\n    }[24h]\n  )\n)",
+          "hide": false,
+          "legendFormat": "{{status}} - {{operation}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
           "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\"\n    }[$__rate_interval]\n  )\n)",
           "hide": true,
           "legendFormat": "{{status}} - {{operation}}",
           "range": true,
-          "refId": "B"
+          "refId": "C"
         }
       ],
       "title": "Sui TX Submissions [$__range / 24h Fallback]",
@@ -10163,7 +10175,7 @@
       "type": "stat"
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 40,
   "tags": [
     "hashi",
@@ -10234,6 +10246,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 82,
+  "version": 84,
   "weekStart": ""
 }
