@@ -7550,7 +7550,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "value": null
               }
             ]
           },
@@ -7614,7 +7615,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "value": null
               }
             ]
           }
@@ -7677,7 +7679,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "value": null
               }
             ]
           }
@@ -7742,7 +7745,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "value": null
               }
             ]
           }
@@ -7807,7 +7811,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "value": null
               }
             ]
           }
@@ -7872,7 +7877,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff"
+                "color": "#ffffff",
+                "value": null
               }
             ]
           }
@@ -7950,7 +7956,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -8015,7 +8022,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -8079,7 +8087,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8148,7 +8157,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8216,7 +8226,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8284,7 +8295,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8352,7 +8364,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -8415,7 +8428,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8483,7 +8497,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -8546,7 +8561,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8615,7 +8631,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8697,7 +8714,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -8765,7 +8783,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -8847,7 +8866,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -8911,7 +8931,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -8978,7 +8999,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -9045,7 +9067,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -9112,7 +9135,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -9213,7 +9237,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -9342,7 +9367,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9395,7 +9421,7 @@
           "refId": "B"
         }
       ],
-      "title": "Blocks Processed",
+      "title": "Blocks Processed [$__range]",
       "type": "timeseries"
     },
     {
@@ -9447,7 +9473,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -9566,7 +9593,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -9695,7 +9723,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -9756,7 +9785,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9819,7 +9849,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9883,7 +9914,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9946,7 +9978,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -10011,7 +10044,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -10075,7 +10109,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -10195,6 +10230,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 101,
+  "version": 102,
   "weekStart": ""
 }
