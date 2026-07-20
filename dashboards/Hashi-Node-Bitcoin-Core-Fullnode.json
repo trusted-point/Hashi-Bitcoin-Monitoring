@@ -910,8 +910,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1
+              },
+              {
+                "color": "#ffffff",
+                "value": 5
               }
             ]
           }
@@ -950,13 +958,13 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "sum(hashi_proposals{alias=\"$hashi_alias\"})",
+          "expr": "hashi_sui_balance{\n  alias=\"$hashi_alias\"\n} / 1e9",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Active Proposals",
+      "title": "$SUI Balance",
       "type": "stat"
     },
     {
@@ -10230,6 +10238,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 102,
+  "version": 104,
   "weekStart": ""
 }
