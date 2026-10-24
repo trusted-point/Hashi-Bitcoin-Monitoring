@@ -1222,7 +1222,7 @@
           "refId": "A"
         }
       ],
-      "title": "❗Guardian Enabled | Online❗",
+      "title": "❗Guardian Enabled❗",
       "type": "stat"
     },
     {
@@ -1230,36 +1230,21 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Indicates whether the local Guardian limiter has lost synchronization with the Guardian.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "True"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "False"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ffffff",
+                "color": "red",
                 "value": null
               },
               {
-                "color": "red",
+                "color": "#ffffff",
                 "value": 1
               }
             ]
@@ -1274,7 +1259,7 @@
         "x": 20,
         "y": 9
       },
-      "id": 105,
+      "id": 71,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -1289,7 +1274,7 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
+        "textMode": "value",
         "wideLayout": true
       },
       "pluginVersion": "11.5.1",
@@ -1300,14 +1285,15 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_guardian_limiter_drifted{alias=\"$hashi_alias\"}",
-          "hide": false,
+          "exemplar": false,
+          "expr": "hashi_trm_enabled{alias=\"$hashi_alias\"}",
+          "instant": true,
           "legendFormat": "__auto",
-          "range": true,
+          "range": false,
           "refId": "A"
         }
       ],
-      "title": "Guardian  Limiter Synced",
+      "title": "TRM Enabled",
       "type": "stat"
     },
     {
@@ -2127,30 +2113,6 @@
           "legendFormat": "{{status}} - {{operation}}",
           "range": true,
           "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\",\n      status=\"success\"\n    }[$__rate_interval]\n  )\n)",
-          "hide": true,
-          "legendFormat": "{{status}} - {{operation}}",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (operation, status) (\n  rate(\n    hashi_sui_tx_submissions_total{\n      alias=\"$hashi_alias\",\n      status!=\"success\"\n    }[$__rate_interval]\n  )\n)",
-          "hide": true,
-          "legendFormat": "{{status}} - {{operation}}",
-          "range": true,
-          "refId": "D"
         }
       ],
       "title": "Sui TXs",
@@ -2588,19 +2550,43 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "No data"
-                }
-              },
-              "type": "value"
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 5,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
-          ],
+          },
+          "decimals": 0,
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -2609,34 +2595,29 @@
                 "value": null
               }
             ]
-          },
-          "unit": "dateTimeFromNow"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
+        "h": 8,
+        "w": 8,
         "x": 0,
         "y": 49
       },
-      "id": 150,
+      "id": 161,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "11.5.1",
       "targets": [
@@ -2646,17 +2627,15 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "hashi_latest_checkpoint_timestamp_ms{\n  alias=\"$hashi_alias\"\n}",
+          "expr": "sum by (flow, outcome) (\n  increase(\n    hashi_trm_screenings_total{alias=\"$hashi_alias\"}[$__range]\n  )\n)",
           "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "B"
+          "legendFormat": "{{flow}} - {{outcome}}",
+          "range": true,
+          "refId": "A"
         }
       ],
-      "title": "Latest Sui Checkpoint Update",
-      "type": "stat"
+      "title": "TRM Screening Attempts",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -2684,7 +2663,7 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 4,
+        "x": 8,
         "y": 49
       },
       "id": 64,
@@ -2733,71 +2712,17 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#ffffff",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 49
-      },
-      "id": 65,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 0,
+                  "text": "No data"
+                }
+              },
+              "type": "value"
+            }
           ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "hashi_kyoto_restarts_total{alias=\"$hashi_alias\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Kyoto Restarts",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -2806,7 +2731,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "dateTimeFromNow"
         },
         "overrides": []
       },
@@ -2816,10 +2742,10 @@
         "x": 12,
         "y": 49
       },
-      "id": 66,
+      "id": 150,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
@@ -2842,13 +2768,16 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_kyoto_reorgs_total{alias=\"$hashi_alias\"}",
+          "exemplar": false,
+          "expr": "hashi_latest_checkpoint_timestamp_ms{\n  alias=\"$hashi_alias\"\n}",
+          "hide": false,
+          "instant": true,
           "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
+          "range": false,
+          "refId": "B"
         }
       ],
-      "title": "Kyoto ₿ Reorgs",
+      "title": "Latest Sui Checkpoint Update",
       "type": "stat"
     },
     {
@@ -2941,8 +2870,136 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 20,
-        "y": 49
+        "x": 8,
+        "y": 53
+      },
+      "id": 65,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_kyoto_restarts_total{alias=\"$hashi_alias\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Kyoto Restarts",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 53
+      },
+      "id": 66,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_kyoto_reorgs_total{alias=\"$hashi_alias\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Kyoto ₿ Reorgs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 53
       },
       "id": 74,
       "options": {
@@ -2985,7 +3042,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 57
       },
       "id": 111,
       "panels": [],
@@ -3021,7 +3078,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 54
+        "y": 58
       },
       "id": 115,
       "options": {
@@ -3057,432 +3114,6 @@
         }
       ],
       "title": "Guardian RPC Call Rate",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Average number of Guardian bootstrap attempts. A sustained non-zero rate may indicate repeated bootstrap retries or difficulty retrieving Guardian information.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#ffffff",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 4,
-        "y": 54
-      },
-      "id": 104,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "rate(\n  hashi_guardian_bootstrap_attempts_total{\n    alias=\"$hashi_alias\"\n  }[$__rate_interval]\n)",
-          "hide": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Guardian Bootstrap Attempts Rate",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Current withdrawal capacity available in the local Guardian limiter bucket.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#ffffff",
-                "value": null
-              }
-            ]
-          },
-          "unit": "currencyBTC"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 54
-      },
-      "id": 107,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "hashi_guardian_limiter_tokens_available{\n  alias=\"$hashi_alias\"\n} / 1e8",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Guardian Available Cap",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#ffffff",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 12,
-        "y": 54
-      },
-      "id": 117,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "hashi_guardian_current_committee_epoch{alias=\"$hashi_alias\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Guardian Epoch",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Indicates whether Guardian integration is enabled and reachable.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#ffffff",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "bool"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 16,
-        "y": 54
-      },
-      "id": 118,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "hashi_guardian_enabled{alias=\"$hashi_alias\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Guardian Enabled | Online",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Indicates whether the local Guardian limiter has lost synchronization with the Guardian.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "True"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "False"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#ffffff",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "bool"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 54
-      },
-      "id": 151,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "hashi_guardian_limiter_drifted{alias=\"$hashi_alias\"}",
-          "hide": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Guardian  Limiter Synced",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 0.8
-              },
-              {
-                "color": "#ffffff",
-                "value": 0.99
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 58
-      },
-      "id": 112,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "expr": "(\n  sum(\n    rate(\n      hashi_guardian_rpc_total{\n        alias=\"$hashi_alias\",\n        outcome=\"ok\"\n      }[$__rate_interval]\n    )\n  )\n  /\n  sum(\n    rate(\n      hashi_guardian_rpc_total{\n        alias=\"$hashi_alias\"\n      }[$__rate_interval]\n    )\n  )\n)",
-          "hide": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Guardian RPC Success Ratio",
       "type": "stat"
     },
     {
@@ -3556,7 +3187,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Maximum withdrawal capacity of the local Guardian limiter bucket, as configured by the Guardian.",
+      "description": "Current withdrawal capacity available in the local Guardian limiter bucket.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3580,6 +3211,72 @@
         "h": 4,
         "w": 4,
         "x": 8,
+        "y": 58
+      },
+      "id": 107,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_guardian_limiter_tokens_available{\n  alias=\"$hashi_alias\"\n} / 1e8",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Guardian Available Cap",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Maximum withdrawal capacity of the local Guardian limiter bucket, as configured by the Guardian.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          },
+          "unit": "currencyBTC"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
         "y": 58
       },
       "id": 109,
@@ -3615,84 +3312,6 @@
         }
       ],
       "title": "Guardian Max Cap",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "No data"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#ffffff",
-                "value": null
-              }
-            ]
-          },
-          "unit": "dateTimeFromNow"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 12,
-        "y": 58
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "value",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS-1}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "hashi_guardian_limiter_last_updated_at_seconds{\n  alias=\"$hashi_alias\"\n} * 1000",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "B"
-        }
-      ],
-      "title": "Latest Guardian  Limiter Update",
       "type": "stat"
     },
     {
@@ -3771,12 +3390,27 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
+      "description": "Indicates whether the local Guardian limiter has lost synchronization with the Guardian.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 0,
+                  "text": "True"
+                },
+                "1": {
+                  "index": 1,
+                  "text": "False"
+                }
+              },
+              "type": "value"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -3786,7 +3420,7 @@
               },
               {
                 "color": "red",
-                "value": 0
+                "value": 1
               }
             ]
           },
@@ -3800,7 +3434,351 @@
         "x": 20,
         "y": 58
       },
-      "id": 71,
+      "id": 151,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_guardian_limiter_drifted{alias=\"$hashi_alias\"}",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Guardian  Limiter Synced",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.8
+              },
+              {
+                "color": "#ffffff",
+                "value": 0.99
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 62
+      },
+      "id": 112,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum(\n    rate(\n      hashi_guardian_rpc_total{\n        alias=\"$hashi_alias\",\n        outcome=\"ok\"\n      }[$__rate_interval]\n    )\n  )\n  /\n  sum(\n    rate(\n      hashi_guardian_rpc_total{\n        alias=\"$hashi_alias\"\n      }[$__rate_interval]\n    )\n  )\n)",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Guardian RPC Success Ratio",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Average number of Guardian bootstrap attempts. A sustained non-zero rate may indicate repeated bootstrap retries or difficulty retrieving Guardian information.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 62
+      },
+      "id": 104,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "rate(\n  hashi_guardian_bootstrap_attempts_total{\n    alias=\"$hashi_alias\"\n  }[$__rate_interval]\n)",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Guardian Bootstrap Attempts Rate",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Maximum withdrawal capacity of the local Guardian limiter bucket, as configured by the Guardian.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 62
+      },
+      "id": 163,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_guardian_limiter_tokens_available{\n  alias=\"$hashi_alias\"\n}\n/\nhashi_guardian_limiter_max_capacity{\n  alias=\"$hashi_alias\"\n}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Guardian Available Cap",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 62
+      },
+      "id": 117,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_guardian_current_committee_epoch{alias=\"$hashi_alias\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Guardian Epoch",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Indicates whether Guardian integration is enabled and reachable.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#ffffff",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "bool"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 62
+      },
+      "id": 118,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -3826,13 +3804,91 @@
             "uid": "${DS_PROMETHEUS-1}"
           },
           "editorMode": "code",
-          "expr": "hashi_screener_enabled{alias=\"$hashi_alias\"}",
+          "expr": "hashi_guardian_enabled{alias=\"$hashi_alias\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "AML Enabled",
+      "title": "Guardian Enabled | Online",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 0,
+                  "text": "No data"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff",
+                "value": null
+              }
+            ]
+          },
+          "unit": "dateTimeFromNow"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 62
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "hashi_guardian_limiter_last_updated_at_seconds{\n  alias=\"$hashi_alias\"\n} * 1000",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        }
+      ],
+      "title": "Latest Guardian  Limiter Update",
       "type": "stat"
     },
     {
@@ -3896,7 +3952,7 @@
         "h": 10,
         "w": 8,
         "x": 0,
-        "y": 62
+        "y": 66
       },
       "id": 110,
       "options": {
@@ -4030,24 +4086,86 @@
                 "value": null
               }
             ]
-          },
-          "unit": "percentunit"
+          }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "available"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "min",
+                "value": 0
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 10,
         "w": 8,
         "x": 8,
-        "y": 62
+        "y": 66
       },
-      "id": 136,
+      "id": 162,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -4064,12 +4182,36 @@
           },
           "editorMode": "code",
           "expr": "hashi_guardian_limiter_tokens_available{\n  alias=\"$hashi_alias\"\n}\n/\nhashi_guardian_limiter_max_capacity{\n  alias=\"$hashi_alias\"\n}",
-          "legendFormat": "__auto",
+          "legendFormat": "percentage",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_guardian_limiter_max_capacity{\n  alias=\"$hashi_alias\"\n} / 100000000",
+          "hide": false,
+          "legendFormat": "max",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS-1}"
+          },
+          "editorMode": "code",
+          "expr": "hashi_guardian_limiter_tokens_available{\n  alias=\"$hashi_alias\"\n} / 100000000",
+          "hide": false,
+          "legendFormat": "available",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Guardian Cap Available",
+      "title": "Guardian ₿ Cap",
       "type": "timeseries"
     },
     {
@@ -4148,7 +4290,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 62
+        "y": 66
       },
       "id": 114,
       "options": {
@@ -4271,7 +4413,7 @@
         "h": 10,
         "w": 8,
         "x": 0,
-        "y": 72
+        "y": 76
       },
       "id": 139,
       "options": {
@@ -4377,7 +4519,7 @@
         "h": 10,
         "w": 8,
         "x": 8,
-        "y": 72
+        "y": 76
       },
       "id": 116,
       "options": {
@@ -4488,7 +4630,7 @@
         "h": 10,
         "w": 8,
         "x": 16,
-        "y": 72
+        "y": 76
       },
       "id": 113,
       "options": {
@@ -4527,7 +4669,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 86
       },
       "id": 91,
       "panels": [],
@@ -4561,7 +4703,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 83
+        "y": 87
       },
       "id": 46,
       "options": {
@@ -4627,7 +4769,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 83
+        "y": 87
       },
       "id": 82,
       "options": {
@@ -4691,7 +4833,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 83
+        "y": 87
       },
       "id": 81,
       "options": {
@@ -4755,7 +4897,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 83
+        "y": 87
       },
       "id": 61,
       "options": {
@@ -4821,7 +4963,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 83
+        "y": 87
       },
       "id": 101,
       "options": {
@@ -4885,7 +5027,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 83
+        "y": 87
       },
       "id": 137,
       "options": {
@@ -4982,7 +5124,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 87
+        "y": 91
       },
       "id": 149,
       "options": {
@@ -5085,7 +5227,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 87
+        "y": 91
       },
       "id": 159,
       "options": {
@@ -5188,7 +5330,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 87
+        "y": 91
       },
       "id": 79,
       "options": {
@@ -5293,7 +5435,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 95
+        "y": 99
       },
       "id": 84,
       "options": {
@@ -5451,7 +5593,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 95
+        "y": 99
       },
       "id": 47,
       "options": {
@@ -5554,7 +5696,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 95
+        "y": 99
       },
       "id": 135,
       "options": {
@@ -5685,7 +5827,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 103
+        "y": 107
       },
       "id": 83,
       "options": {
@@ -5789,7 +5931,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 103
+        "y": 107
       },
       "id": 160,
       "options": {
@@ -5884,7 +6026,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 103
+        "y": 107
       },
       "id": 134,
       "options": {
@@ -5935,7 +6077,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 111
+        "y": 115
       },
       "id": 155,
       "panels": [],
@@ -6003,7 +6145,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 112
+        "y": 116
       },
       "id": 103,
       "options": {
@@ -6121,7 +6263,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 112
+        "y": 116
       },
       "id": 153,
       "options": {
@@ -6216,7 +6358,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 112
+        "y": 116
       },
       "id": 145,
       "options": {
@@ -6335,7 +6477,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 121
+        "y": 125
       },
       "id": 127,
       "options": {
@@ -6441,7 +6583,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 121
+        "y": 125
       },
       "id": 146,
       "options": {
@@ -6574,7 +6716,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 121
+        "y": 125
       },
       "id": 130,
       "options": {
@@ -6672,7 +6814,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 130
+        "y": 134
       },
       "id": 68,
       "options": {
@@ -6766,7 +6908,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 130
+        "y": 134
       },
       "id": 154,
       "options": {
@@ -6899,7 +7041,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 130
+        "y": 134
       },
       "id": 156,
       "options": {
@@ -6941,7 +7083,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 139
+        "y": 143
       },
       "id": 128,
       "panels": [],
@@ -7010,7 +7152,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 140
+        "y": 144
       },
       "id": 92,
       "options": {
@@ -7130,7 +7272,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 140
+        "y": 144
       },
       "id": 140,
       "options": {
@@ -7250,7 +7392,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 140
+        "y": 144
       },
       "id": 142,
       "options": {
@@ -7369,7 +7511,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 149
+        "y": 153
       },
       "id": 125,
       "options": {
@@ -7488,7 +7630,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 149
+        "y": 153
       },
       "id": 141,
       "options": {
@@ -7607,7 +7749,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 149
+        "y": 153
       },
       "id": 144,
       "options": {
@@ -7671,7 +7813,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 158
+        "y": 162
       },
       "id": 93,
       "panels": [],
@@ -7706,7 +7848,7 @@
         "h": 3,
         "w": 12,
         "x": 0,
-        "y": 159
+        "y": 163
       },
       "id": 95,
       "options": {
@@ -7770,7 +7912,7 @@
         "h": 3,
         "w": 12,
         "x": 12,
-        "y": 159
+        "y": 163
       },
       "id": 37,
       "options": {
@@ -7834,7 +7976,7 @@
         "h": 3,
         "w": 12,
         "x": 0,
-        "y": 162
+        "y": 166
       },
       "id": 100,
       "options": {
@@ -7900,7 +8042,7 @@
         "h": 3,
         "w": 12,
         "x": 12,
-        "y": 162
+        "y": 166
       },
       "id": 97,
       "options": {
@@ -7966,7 +8108,7 @@
         "h": 3,
         "w": 12,
         "x": 0,
-        "y": 165
+        "y": 169
       },
       "id": 99,
       "options": {
@@ -8032,7 +8174,7 @@
         "h": 3,
         "w": 12,
         "x": 12,
-        "y": 165
+        "y": 169
       },
       "id": 96,
       "options": {
@@ -8077,7 +8219,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 168
+        "y": 172
       },
       "id": 34,
       "panels": [],
@@ -8111,7 +8253,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 169
+        "y": 173
       },
       "id": 1,
       "options": {
@@ -8178,7 +8320,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 169
+        "y": 173
       },
       "id": 13,
       "options": {
@@ -8247,7 +8389,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 169
+        "y": 173
       },
       "id": 3,
       "options": {
@@ -8317,7 +8459,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 169
+        "y": 173
       },
       "id": 14,
       "options": {
@@ -8386,7 +8528,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 169
+        "y": 173
       },
       "id": 7,
       "options": {
@@ -8455,7 +8597,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 169
+        "y": 173
       },
       "id": 8,
       "options": {
@@ -8519,7 +8661,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 173
+        "y": 177
       },
       "id": 4,
       "options": {
@@ -8588,7 +8730,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 173
+        "y": 177
       },
       "id": 56,
       "options": {
@@ -8652,7 +8794,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 173
+        "y": 177
       },
       "id": 30,
       "options": {
@@ -8721,7 +8863,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 173
+        "y": 177
       },
       "id": 6,
       "options": {
@@ -8791,7 +8933,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 173
+        "y": 177
       },
       "id": 10,
       "options": {
@@ -8874,7 +9016,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 173
+        "y": 177
       },
       "id": 5,
       "options": {
@@ -8926,7 +9068,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -8938,7 +9081,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 177
+        "y": 181
       },
       "id": 138,
       "options": {
@@ -9008,7 +9151,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -9020,7 +9164,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 177
+        "y": 181
       },
       "id": 26,
       "options": {
@@ -9072,7 +9216,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -9087,7 +9232,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 177
+        "y": 181
       },
       "id": 21,
       "options": {
@@ -9139,7 +9284,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -9154,7 +9300,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 177
+        "y": 181
       },
       "id": 15,
       "options": {
@@ -9206,7 +9352,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -9221,7 +9368,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 177
+        "y": 181
       },
       "id": 16,
       "options": {
@@ -9273,7 +9420,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               },
               {
                 "color": "red",
@@ -9288,7 +9436,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 177
+        "y": 181
       },
       "id": 17,
       "options": {
@@ -9374,7 +9522,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -9385,7 +9534,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 181
+        "y": 185
       },
       "id": 85,
       "options": {
@@ -9503,7 +9652,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9514,7 +9664,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 181
+        "y": 185
       },
       "id": 31,
       "options": {
@@ -9608,7 +9758,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -9620,7 +9771,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 189
+        "y": 193
       },
       "id": 28,
       "options": {
@@ -9727,7 +9878,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -9738,7 +9890,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 189
+        "y": 193
       },
       "id": 19,
       "options": {
@@ -9856,7 +10008,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -9868,7 +10021,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 197
+        "y": 201
       },
       "id": 33,
       "options": {
@@ -9917,7 +10070,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9928,7 +10082,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 197
+        "y": 201
       },
       "id": 32,
       "options": {
@@ -9980,7 +10134,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -9991,7 +10146,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 197
+        "y": 201
       },
       "id": 27,
       "options": {
@@ -10044,7 +10199,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -10055,7 +10211,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 197
+        "y": 201
       },
       "id": 20,
       "options": {
@@ -10107,7 +10263,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -10119,7 +10276,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 201
+        "y": 205
       },
       "id": 29,
       "options": {
@@ -10172,7 +10329,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           },
@@ -10184,7 +10342,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 201
+        "y": 205
       },
       "id": 25,
       "options": {
@@ -10236,7 +10394,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "yellow"
+                "color": "yellow",
+                "value": null
               }
             ]
           }
@@ -10247,7 +10406,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 201
+        "y": 205
       },
       "id": 24,
       "options": {
@@ -10356,6 +10515,6 @@
   "timezone": "browser",
   "title": "Hashi Node & Bitcoin Core Fullnode",
   "uid": "fbw7kd6retjwgp",
-  "version": 135,
+  "version": 144,
   "weekStart": ""
 }
